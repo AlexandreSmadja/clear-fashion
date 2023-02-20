@@ -50,17 +50,32 @@ console.log(teeshirt);
 const marketplace = require("./data.js");
 const taille = marketplace.length;
 // 2. Log the variable
-console.log(taille)
+console.log(taille);
 
 // 🎯 TODO 3: Brands name
 // 1. Create a variable and assign it the list of brands name only
+// console.log(marketplace[0]['brand']);
+const marques = [];
+for (let i=0; i < taille; i++) {
+  if (marques.includes(marketplace[i].brand)== false){
+    marques.push(marketplace[i].brand);}
+}
+
 // 2. Log the variable
+console.log(marques);
 // 3. Log how many brands we have
+console.log(marques.length);
 
 // 🎯 TODO 4: Sort by price
 // 1. Create a function to sort the marketplace products by price
+const sorted = marketplace.sort(function(a,b) {return a.price - b.price});
 // 2. Create a variable and assign it the list of products by price from lowest to highest
+const products=[];
+for (let i=0; i<taille;i++) {
+  products.push(sorted[i].name);
+}
 // 3. Log the variable
+console.log(products);
 
 // 🎯 TODO 5: Sort by date
 // 1. Create a function to sort the marketplace objects by products date
