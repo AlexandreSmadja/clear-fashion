@@ -33,8 +33,9 @@ console.log(MY_FAVORITE_BRANDS[0]);
 // 0. I have 3 favorite brands stored in MY_FAVORITE_BRANDS variable
 // 1. Create a new variable and assign it the link of the cheapest t-shirt
 // I can find on these e-shops
+var teeshirt = 'https://www.faguo-store.com/fr/vetements/7606-arcy-t-shirt-en-coton-recycle-kaki.html'
 // 2. Log the variable
-
+console.log(teeshirt)
 /**
  * 👕
  * Easy 😁?
