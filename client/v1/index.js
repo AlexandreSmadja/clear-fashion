@@ -75,20 +75,34 @@ for (let i=0; i<taille;i++) {
   products.push(sorted[i].name);
 }
 // 3. Log the variable
-console.log(products);
+//console.log(products);
 
 // 🎯 TODO 5: Sort by date
 // 1. Create a function to sort the marketplace objects by products date
+const timeSorted = marketplace.sort(function(a,b) {return new Date(b.released) -new Date(a.released)});
 // 2. Create a variable and assign it the list of products by date from recent to old
+const productsTime=[];
+for (let i=0; i<taille;i++) {
+  productsTime.push(timeSorted[i].released);
+}
 // 3. Log the variable
+console.log(productsTime);
+
+
 
 // 🎯 TODO 6: Filter a specific price range
 // 1. Filter the list of products between 50€ and 100€
+const priceRange= marketplace.filter(function(x) {return x.price>50 && x.price<100})
+
 // 2. Log the list
+console.log(priceRange)
 
 // 🎯 TODO 7: Average price
 // 1. Determine the average price of the marketplace
+const average=  marketplace.reduce((a,b)=>a+b.price,0)/marketplace.length;
+
 // 2. Log the average
+console.log(average);
 
 /**
  * 🏎
