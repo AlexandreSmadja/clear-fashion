@@ -33,9 +33,9 @@ console.log(MY_FAVORITE_BRANDS[0]);
 // 0. I have 3 favorite brands stored in MY_FAVORITE_BRANDS variable
 // 1. Create a new variable and assign it the link of the cheapest t-shirt
 // I can find on these e-shops
-var teeshirt = 'https://www.faguo-store.com/fr/vetements/7606-arcy-t-shirt-en-coton-recycle-kaki.html'
+const teeshirt = 'https://www.faguo-store.com/fr/vetements/7606-arcy-t-shirt-en-coton-recycle-kaki.html';
 // 2. Log the variable
-console.log(teeshirt)
+console.log(teeshirt);
 /**
  * 👕
  * Easy 😁?
@@ -47,7 +47,10 @@ console.log(teeshirt)
 
 // 🎯 TODO 2: Number of products
 // 1. Create a variable and assign it the number of products
+const marketplace = require("./data.js");
+const taille = marketplace.length;
 // 2. Log the variable
+console.log(taille)
 
 // 🎯 TODO 3: Brands name
 // 1. Create a variable and assign it the list of brands name only
