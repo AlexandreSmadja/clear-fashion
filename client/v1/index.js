@@ -469,8 +469,8 @@ blueJacket = {
 // 3. Update `jacket` property with `favorite` to true WITHOUT changing blueJacket properties
 jacket = JSON.parse(JSON.stringify(blueJacket));
 jacket.favorite = true;
-console.log("Blue Jacket : ", blueJacket);
-console.log("Jacket : ", jacket);
+console.log("Blue Jacket :", blueJacket);
+console.log("Jacket :", jacket);
 
 /**
  * 🎬
@@ -482,5 +482,3 @@ console.log("Jacket : ", jacket);
 // 1. Save MY_FAVORITE_BRANDS in the localStorage
 
 // 2. log the localStorage
-window.localStorage.setItem("MY_FAVORITE_BRANDS", JSON.stringify(MY_FAVORITE_BRANDS));
-console.log(JSON.parse(localStorage.getItem("MY_FAVORITE_BRANDS")));
