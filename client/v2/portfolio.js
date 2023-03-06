@@ -215,3 +215,10 @@ selectReleased.addEventListener("click", async (event) => {
 
 
 // Feature 4
+selectReasonable.addEventListener("click", async (event) => {
+  const products = await fetchProducts(1, currentPagination.count);
+  products.result = products.result.filter(product => { 
+    return product.price < 50 });
+  setCurrentProducts(products);
+  render(currentProducts, currentPagination);
+})
