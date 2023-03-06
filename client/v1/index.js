@@ -48,7 +48,7 @@ console.log(teeshirt);
 
 // 🎯 TODO 2: Number of products
 // 1. Create a variable and assign it the number of products
-const marketplace = require("./data.js");
+//const marketplace = require("./data.js");
 const taille = marketplace.length;
 // 2. Log the variable
 console.log(taille);
