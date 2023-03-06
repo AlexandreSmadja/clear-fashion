@@ -222,3 +222,5 @@ selectReasonable.addEventListener("click", async (event) => {
   setCurrentProducts(products);
   render(currentProducts, currentPagination);
 })
+
+// Feature 5
