@@ -26,6 +26,7 @@ const selectShow = document.querySelector('#show-select');
 const selectPage = document.querySelector('#page-select');
 const selectBrand = document.querySelector('#brand-select');
 const selectReleased = document.querySelector('#recent-select');
+const selectReasonable =document.querySelector('#reasonable-select');
 const sectionProducts = document.querySelector('#products');
 const spanNbProducts = document.querySelector('#nbProducts');
 
@@ -202,13 +203,15 @@ document.addEventListener('DOMContentLoaded', async () => {
 // Feature 3
 selectReleased.addEventListener("click", async (event) => {
   const products = await fetchProducts(1, currentPagination.count);
-  products.result = products.filter(product => {
+  products.result = products.result.filter(product => {
     const date = new Date(product.released);
     return date > Date.now() - 12096e5;
   });
-
   setCurrentProducts(products);
   render(currentProducts, currentPagination);
 })
+
+
+
 
 // Feature 4
