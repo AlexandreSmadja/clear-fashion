@@ -28,6 +28,7 @@ const selectBrand = document.querySelector('#brand-select');
 const selectReleased = document.querySelector('#recent-select');
 const selectReasonable = document.querySelector('#reasonable-select');
 const selectSort = document.querySelector('#sort-select')
+const spanNbNewProducts = document.querySelector('#nbNewProducts');
 
 const sectionProducts = document.querySelector('#products');
 const spanNbProducts = document.querySelector('#nbProducts');
@@ -147,12 +148,14 @@ const renderIndicators = pagination => {
   const {count} = pagination;
 
   spanNbProducts.innerHTML = count;
+
 };
 
 const render = (products, pagination) => {
   renderProducts(products);
   renderPagination(pagination);
   renderIndicators(pagination);
+  renderNewProducts();
 };
 
 /**
@@ -242,7 +245,21 @@ selectSort.addEventListener("change", async (event) => {
   else if (event.target.value == "date-desc"){
     products.result.sort((a,b) => new Date(a.released) - new Date(b.released));
   }
-  console.log(0);
   setCurrentProducts(products);
   render(currentProducts, currentPagination);
 })
+
+// Feature 8
+// see in renderIndicators
+
+// Feature 9
+// see in renderIndicators
+
+const renderNewProducts = async () => {
+  const products = await fetchProducts(1, currentPagination.count);
+  const recentProducts = products.result.filter(products => {
+    return new Date(products.released) > Date.now() - 12096e5;
+  })
+  const count = recentProducts.length;
+  spanNbNewProducts.innerHTML = count;
+}
