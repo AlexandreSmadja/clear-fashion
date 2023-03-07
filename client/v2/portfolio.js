@@ -30,6 +30,10 @@ const selectReasonable = document.querySelector('#reasonable-select');
 const selectSort = document.querySelector('#sort-select')
 const spanNbNewProducts = document.querySelector('#nbNewProducts');
 
+const spanP50 = document.querySelector('#p50');
+const spanP90 = document.querySelector('#p90');
+const spanP95 = document.querySelector('#p95');
+
 const sectionProducts = document.querySelector('#products');
 const spanNbProducts = document.querySelector('#nbProducts');
 
@@ -156,6 +160,22 @@ const render = (products, pagination) => {
   renderPagination(pagination);
   renderIndicators(pagination);
   renderNewProducts();
+
+  const p50 = percentils(0.50);
+  p50.then(function(result) {
+    spanP50.innerHTML = result;
+  });
+
+  const p90 = percentils(0.90);
+  p90.then(function(result) {
+    spanP90.innerHTML = result;
+  });
+
+  const p95 = percentils(0.95);
+  p95.then(function(result) {
+    spanP95.innerHTML = result;
+  });
+
 };
 
 /**
@@ -264,3 +284,14 @@ const renderNewProducts = async () => {
   spanNbNewProducts.innerHTML = count;
 }
 
+// Feature 10
+
+const percentils = async (percentage) => {
+  const products = await fetchProducts(1, currentPagination.count);
+  const sortedProducts = products.result.sort((a,b) => a.price-b.price);
+  const posValue = Math.floor(sortedProducts.length * percentage);
+  const price = sortedProducts[posValue].price;
+  return price;
+}
+
+// Feature 11
