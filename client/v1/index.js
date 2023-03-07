@@ -469,7 +469,9 @@ blueJacket = {
 // 3. Update `jacket` property with `favorite` to true WITHOUT changing blueJacket properties
 jacket = JSON.parse(JSON.stringify(blueJacket));
 jacket.favorite = true;
+
 console.log("Blue Jacket :", blueJacket);
+
 console.log("Jacket :", jacket);
 
 /**
@@ -480,5 +482,4 @@ console.log("Jacket :", jacket);
 
 // 🎯 LAST TODO: Save in localStorage
 // 1. Save MY_FAVORITE_BRANDS in the localStorage
-
 // 2. log the localStorage
