@@ -26,7 +26,9 @@ const selectShow = document.querySelector('#show-select');
 const selectPage = document.querySelector('#page-select');
 const selectBrand = document.querySelector('#brand-select');
 const selectReleased = document.querySelector('#recent-select');
-const selectReasonable =document.querySelector('#reasonable-select');
+const selectReasonable = document.querySelector('#reasonable-select');
+const selectSort = document.querySelector('#sort-select')
+
 const sectionProducts = document.querySelector('#products');
 const spanNbProducts = document.querySelector('#nbProducts');
 
@@ -215,6 +217,7 @@ selectReleased.addEventListener("click", async (event) => {
 
 
 // Feature 4
+
 selectReasonable.addEventListener("click", async (event) => {
   const products = await fetchProducts(1, currentPagination.count);
   products.result = products.result.filter(product => { 
@@ -223,4 +226,23 @@ selectReasonable.addEventListener("click", async (event) => {
   render(currentProducts, currentPagination);
 })
 
-// Feature 5
+// Feature 5 and 6
+
+selectSort.addEventListener("change", async (event) => {
+  const products = await fetchProducts(1, currentPagination.count)
+  if (event.target.value == "price-asc"){
+    products.result.sort((a,b) => a.price-b.price);
+  }
+  else if (event.target.value == "price-desc"){
+    products.result.sort((a,b) => b.price - a.price);
+  }
+  else if (event.target.value == "date-asc"){
+    products.result.sort((a,b) => new Date(b.released) - new Date(a.released));
+  }
+  else if (event.target.value == "date-desc"){
+    products.result.sort((a,b) => new Date(a.released) - new Date(b.released));
+  }
+  console.log(0);
+  setCurrentProducts(products);
+  render(currentProducts, currentPagination);
+})
