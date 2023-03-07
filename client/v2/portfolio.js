@@ -263,3 +263,4 @@ const renderNewProducts = async () => {
   const count = recentProducts.length;
   spanNbNewProducts.innerHTML = count;
 }
+
