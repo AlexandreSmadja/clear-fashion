@@ -108,7 +108,7 @@ const renderProducts = products => {
       return `
       <div class="product" id=${product.uuid}>
         <span>${product.brand}</span>
-        <a href="${product.link}" target="_blank">${product.name}</a>
+        <a href="${product.link}" target='_blank'>${product.name}</a>
         <span>${product.price}</span>
       </div>
     `;
@@ -308,3 +308,8 @@ const getLastRelease = async () => {
   console.log(sortedProducts[0].released)
   return sortedProducts[0].released;
 }
+
+// Feature 12
+// In renderProducts I just added target='_blank'
+
+// Feature 13
