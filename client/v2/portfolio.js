@@ -33,6 +33,7 @@ const spanNbNewProducts = document.querySelector('#nbNewProducts');
 const spanP50 = document.querySelector('#p50');
 const spanP90 = document.querySelector('#p90');
 const spanP95 = document.querySelector('#p95');
+const spanLastReleased = document.querySelector('#lastReleased');
 
 const sectionProducts = document.querySelector('#products');
 const spanNbProducts = document.querySelector('#nbProducts');
@@ -176,6 +177,11 @@ const render = (products, pagination) => {
     spanP95.innerHTML = result;
   });
 
+  const lastRelease = getLastRelease();
+  lastRelease.then(function(result) {
+    spanLastReleased.innerHTML = result;
+  });
+
 };
 
 /**
@@ -295,3 +301,10 @@ const percentils = async (percentage) => {
 }
 
 // Feature 11
+
+const getLastRelease = async () => {
+  const products = await fetchProducts(1, currentPagination.count);
+  const sortedProducts = products.result.sort((a,b) => new Date(b.released)- new Date(a.released));
+  console.log(sortedProducts[0].released)
+  return sortedProducts[0].released;
+}
