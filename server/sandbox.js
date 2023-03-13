@@ -3,17 +3,32 @@ const dedicatedbrand = require('./eshops/dedicatedbrand');
 const montlimartbrand = require('./eshops/montlimartbrand');
 const circlebrand = require('./eshops/circlebrand');
 
-const dedicated = ['dedicated', "https://www.dedicatedbrand.com/en/men/t-shirts"];
-const montlimard = ['montlimard', "https://www.montlimart.com/99-vetements"];
-const circle = ['circle', "https://shop.circlesportswear.com/collections/collection-homme"];
+const dedicated = ['dedicated', "https://www.dedicatedbrand.com/en/men/t-shirts", dedicatedbrand];
+const montlimard = ['montlimard', "https://www.montlimart.com/99-vetements", montlimartbrand];
+const circle = ['circle', "https://shop.circlesportswear.com/collections/collection-homme", circlebrand];
 
-const eshops = [dedicated,montlimard /*,circle*/];
+const eshops = [dedicated,montlimard ,circle];
 
-async function sandbox (eshop = 'https://shop.circlesportswear.com/collections/collection-homme') {
+async function sandbox (brand = 'dedicated') {
   try {
-    console.log(`🕵️‍♀️  browsing ${eshop} eshop`);
+    var products;
+    var eshop;
+    switch(brand) {
+      case('dedicated'):
+        eshop = "https://www.dedicatedbrand.com/en/men/t-shirts";
+        products = await dedicatedbrand.scrape(eshop);
+        break;
+      case('montlimard'):
+        eshop = "https://www.montlimart.com/99-vetements";
+        products = await montlimartbrand.scrape(eshop);
+        break;
+      case('circle'):
+        eshop = "https://shop.circlesportswear.com/collections/collection-homme";
+        products = await circlebrand.scrape(eshop);
+        break;
+    }
 
-    const products = await circlebrand.scrape(eshop);
+    console.log(`🕵️‍♀️  browsing ${eshop} eshop`);
 
     console.log(products);
     console.log('done');
@@ -23,6 +38,8 @@ async function sandbox (eshop = 'https://shop.circlesportswear.com/collections/c
     process.exit(1);
   }
 }
+
+
 
 const [,, eshop] = process.argv;
 
