@@ -4,6 +4,7 @@ const montlimartbrand = require('./eshops/montlimartbrand');
 const circlebrand = require('./eshops/circlebrand');
 
 const fs = require('fs');
+const { json } = require('stream/consumers');
 
 
 async function sandbox (brand = 'dedicated') {
@@ -32,13 +33,11 @@ async function sandbox (brand = 'dedicated') {
         break;
     }
 
-    const jsonString = JSON.stringify(products);
-    fs.writeFile('./exports/' + filename, jsonString, (err) => {
-      if (err) {
-        console.error(err);
-        return;
-      }
-    })
+    const toJson=JSON.stringify(products);
+        fs.writeFileSync('./exports/' + filename, toJson, (err)=>{
+            if(err) throw err;
+        })
+    
 
     console.log(products);
     console.log('done');
