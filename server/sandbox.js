@@ -3,35 +3,48 @@ const dedicatedbrand = require('./eshops/dedicatedbrand');
 const montlimartbrand = require('./eshops/montlimartbrand');
 const circlebrand = require('./eshops/circlebrand');
 
-const dedicated = ['dedicated', "https://www.dedicatedbrand.com/en/men/t-shirts", dedicatedbrand];
-const montlimard = ['montlimard', "https://www.montlimart.com/99-vetements", montlimartbrand];
-const circle = ['circle', "https://shop.circlesportswear.com/collections/collection-homme", circlebrand];
+const fs = require('fs');
 
-const eshops = [dedicated,montlimard ,circle];
 
 async function sandbox (brand = 'dedicated') {
   try {
     var products;
     var eshop;
+    var filename;
     switch(brand) {
       case('dedicated'):
         eshop = "https://www.dedicatedbrand.com/en/men/t-shirts";
+        console.log(`🕵️‍♀️  browsing ${eshop} eshop`);
         products = await dedicatedbrand.scrape(eshop);
+        filename = "dedicated_export.json"
         break;
-      case('montlimard'):
+      case('montlimart'):
         eshop = "https://www.montlimart.com/99-vetements";
+        console.log(`🕵️‍♀️  browsing ${eshop} eshop`);
         products = await montlimartbrand.scrape(eshop);
+        filename = "montlimart_export.json"
         break;
       case('circle'):
         eshop = "https://shop.circlesportswear.com/collections/collection-homme";
+        console.log(`🕵️‍♀️  browsing ${eshop} eshop`);
         products = await circlebrand.scrape(eshop);
+        filename = "circle_export.json"
         break;
     }
 
-    console.log(`🕵️‍♀️  browsing ${eshop} eshop`);
+    const jsonString = JSON.stringify(products);
+    fs.writeFile('./exports/' + filename, jsonString, (err) => {
+      if (err) {
+        console.error(err);
+        return;
+      }
+    })
 
     console.log(products);
     console.log('done');
+
+    
+
     process.exit(0);
   } catch (e) {
     console.error(e);
