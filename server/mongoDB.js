@@ -1,12 +1,12 @@
 const fs = require('fs');
 const {MongoClient} = require('mongodb');
 
-
+const MONGODB_DB_NAME = 'clear-fashion';
+const MONGODB_URI = 'mongodb+srv://asmadja:EAveVGPvYlYepK8g@clear-fashion.wwjougk.mongodb.net/test?retryWrites=true&writeConcern=majority';
 
 
 async function insertProducts() {
-  const MONGODB_DB_NAME = 'clear-fashion';
-  const MONGODB_URI = 'mongodb+srv://asmadja:EAveVGPvYlYepK8g@clear-fashion.wwjougk.mongodb.net/test?retryWrites=true&writeConcern=majority';
+  
   const client = await MongoClient.connect(MONGODB_URI, {'useNewUrlParser': true});
   const db = client.db(MONGODB_DB_NAME);
 
@@ -21,3 +21,41 @@ async function insertProducts() {
 
   process.exit(0);
 }
+
+
+async function findProductsBrand(brand = "dedicated") {
+  var result;
+  const client = await MongoClient.connect(MONGODB_URI, {'useNewUrlParser': true});
+  const db = client.db(MONGODB_DB_NAME);
+  const collection = db.collection('products');
+
+  result = await db.collection('products').find({brand}).toArray()
+  console.log(result);
+  process.exit(0);
+}
+
+async function findProductsLessThanPrice(price = 50) {
+  var result;
+  const client = await MongoClient.connect(MONGODB_URI, {'useNewUrlParser': true});
+  const db = client.db(MONGODB_DB_NAME);
+  const collection = db.collection('products');
+
+  result = await db.collection('products').find({price:{"$lte":price}}).toArray()
+  console.log(result);
+  process.exit(0);
+}
+
+
+async function productsSortedByPrice(order = "asc") {
+  var result;
+  const client = await MongoClient.connect(MONGODB_URI, {'useNewUrlParser': true});
+  const db = client.db(MONGODB_DB_NAME);
+  const collection = db.collection('products');
+
+  result = await db.collection('products').find({}).sort({"price":1}).toArray()
+  console.log(result);
+  process.exit(0);
+}
+
+const [,, brand] = process.argv;
+productsSortedByPrice();
