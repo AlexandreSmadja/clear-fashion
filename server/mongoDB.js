@@ -2,12 +2,14 @@ const fs = require('fs');
 const {MongoClient} = require('mongodb');
 
 
-async function getClient() {
-  const MONGODB_URI = 'mongodb+srv://asmadja:EAveVGPvYlYepK8g@clear-fashion.wwjougk.mongodb.net/test?retryWrites=true&writeConcern=majority';
+
+
+async function getProducts(brand) {
   const MONGODB_DB_NAME = 'clear-fashion';
+  const MONGODB_URI = 'mongodb+srv://asmadja:EAveVGPvYlYepK8g@clear-fashion.wwjougk.mongodb.net/test?retryWrites=true&writeConcern=majority';
   const client = await MongoClient.connect(MONGODB_URI, {'useNewUrlParser': true});
-  return client;
+  const db = client.db(MONGODB_DB_NAME);
+
+  
+
 }
-
-
-const client = getClient

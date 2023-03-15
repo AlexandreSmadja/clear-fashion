@@ -34,7 +34,7 @@ async function sandbox (brand = 'dedicated') {
     }
 
     const toJson=JSON.stringify(products);
-        fs.writeFileSync('./exports/' + filename, toJson, (err)=>{
+        fs.writeFileSync('C:/Users/alexa/Documents/td/S08/web app/clear-fashion/server/exports/' + filename, toJson, (err)=>{
             if(err) throw err;
         })
     
