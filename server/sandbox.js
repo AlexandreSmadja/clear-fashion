@@ -56,8 +56,6 @@ async function sandbox (brand = 'all') {
     
 
     console.log(products);
-    console.log(products.length);
-    console.log(typeof(products))
     console.log('done');
 
     
