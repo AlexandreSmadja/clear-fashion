@@ -21,7 +21,7 @@ async function insertProducts() {
 
   process.exit(0);
 }
-
+//insertProducts();
 
 async function findProductsBrand(brand = "dedicated") {
   var result;
@@ -40,7 +40,7 @@ async function findProductsLessThanPrice(price = 50) {
   const db = client.db(MONGODB_DB_NAME);
   const collection = db.collection('products');
 
-  result = await db.collection('products').find({price:{"$lte":price}}).toArray()
+  result = await collection.find({price:{"$lte":price}}).toArray()
   console.log(result);
   process.exit(0);
 }
@@ -63,5 +63,22 @@ async function productsSortedByPrice(order = "default") {
   process.exit(0);
 }
 
+
+async function productsSortedByDate(order = "default") {
+  if (order=="asc"){order = 1}
+  else if (order == "desc") {order = -1}
+  else {
+    order = 1;
+    console.log("By default the order is ascending")
+  }
+  var result;
+  const client = await MongoClient.connect(MONGODB_URI, {'useNewUrlParser': true});
+  const db = client.db(MONGODB_DB_NAME);
+  const collection = db.collection('products');
+
+  result = await db.collection('products').find({}).sort({"date":order}).toArray()
+  console.log(result);
+  process.exit(0);
+}
 const [,, order] = process.argv;
-productsSortedByPrice(order);
+productsSortedByDate(50);
