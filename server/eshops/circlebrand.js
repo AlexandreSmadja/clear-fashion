@@ -24,8 +24,8 @@ const parse = data => {
           .split("€")[1]
       );
       const brand = "circle"
-
-      return {name, price, brand};
+      const date = new Date();
+      return {name, price, brand, date};
     })
     .get();
 };

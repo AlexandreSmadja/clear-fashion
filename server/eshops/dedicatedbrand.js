@@ -22,8 +22,8 @@ const parse = data => {
           .text()
       );
       const brand= 'dedicated';
-
-      return {name, price, brand};
+      const date = new Date();
+      return {name, price, brand, date};
     })
     .get();
 };
