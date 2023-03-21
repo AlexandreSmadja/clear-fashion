@@ -22,32 +22,50 @@ app.use(helmet());
 
 app.options('*', cors());
 
-async function getProduct() {
-  const client = await MongoClient.connect(MONGODB_URI, {'useNewUrlParser': true});
-  const db = client.db(MONGODB_DB_NAME);
-  const collection = db.collection('products');
 
-  app.get('/products/:idProd', async (request, response) => {
-    try {
-      const {idProd} = request.params;
-      const result = await collection.findOne({_id:ObjectId(idProd)});
-      
-      response.send(result)
-    }
-    catch(err) {
-      console.error(err.message);
-    }    
-  });
 
-  app.get('/products/search/', async (request, response) => {
-    try {
+app.get('/products/search', async (request, response) => {
+  try {
+    const client = await MongoClient.connect(MONGODB_URI, {'useNewUrlParser': true});
+    const db = client.db(MONGODB_DB_NAME);
+    const collection = db.collection('products');
 
+    const lim = request.query.limit || 12;
+    const brand = request.query.brand || undefined; 
+    const price = request.query.price || undefined;
+     
+    const query = {};
+    if (brand !== undefined){
+      query.brand=brand;
+    };
+    if (price !== undefined){
+      query.price={$lte:parseInt(price)};
     }
-    catch(err) {
-      console.error(err.message);
-    }
-  })
-}
+    
+    const result = await collection.find(query).limit(parseInt(lim)).toArray();
+    response.send(result);
+  }
+  catch(err) {
+    console.error(err.message);
+  }
+});
+
+/*app.get('/products/:idProd', async (request, response) => {
+  try {
+    const client = await MongoClient.connect(MONGODB_URI, {'useNewUrlParser': true});
+    const db = client.db(MONGODB_DB_NAME);
+    const collection = db.collection('products');
+    
+    const {idProd} = request.params;
+    const result = await collection.findOne({_id:ObjectId(idProd)});
+    
+    response.send(result);
+  }
+  catch(err) {
+    console.error(err.message);
+  }    
+});*/
+
 
 
 
@@ -59,4 +77,3 @@ app.get('/', (request, response) => {
 app.listen(PORT);
 
 console.log(`📡 Running on port ${PORT}`);
-getProduct();
