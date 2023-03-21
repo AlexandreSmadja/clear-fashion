@@ -29,7 +29,7 @@ async function findProductsBrand(brand = "dedicated") {
   const db = client.db(MONGODB_DB_NAME);
   const collection = db.collection('products');
 
-  result = await db.collection('products').find({brand}).toArray()
+  result = await collection.find({brand}).toArray()
   console.log(result);
   process.exit(0);
 }
@@ -58,7 +58,7 @@ async function productsSortedByPrice(order = "default") {
   const db = client.db(MONGODB_DB_NAME);
   const collection = db.collection('products');
 
-  result = await db.collection('products').find({}).sort({"price":order}).toArray()
+  result = await collection.find({}).sort({"price":order}).toArray()
   console.log(result);
   process.exit(0);
 }
@@ -76,7 +76,7 @@ async function productsSortedByDate(order = "default") {
   const db = client.db(MONGODB_DB_NAME);
   const collection = db.collection('products');
 
-  result = await db.collection('products').find({}).sort({"date":order}).toArray()
+  result = await collection.find({}).sort({"date":order}).toArray()
   console.log(result);
   process.exit(0);
 }
